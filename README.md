@@ -1,3 +1,17 @@
+Basic React.js environment with ES6, Babel, and webpack-dev-server
+==========================
+
+
+run these command to get it working and visit localhost://8080
+```
+$ npm i
+$ npm run build
+$ webpack-dev-server
+```
+
+
+package.json file
+```
 {
   "name": "react-template-starter-basic",
   "version": "1.0.0",
@@ -32,3 +46,4 @@
     "react-dom": "^15.1.0"
   }
 }
+```
