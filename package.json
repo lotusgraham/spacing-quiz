@@ -2,7 +2,7 @@
   "name": "react-template-starter-basic",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "js/index.js",
   "scripts": {
     "mkdir": "mkdir -p build",
     "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:js",
