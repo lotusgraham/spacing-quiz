@@ -1,4 +1,7 @@
-var termsArray [
+var connect = require('./db/connect');
+var Question = require('./models/Question.js');
+
+var seedTerms = [
     {
         question_pos: 1,
         german: "Apfel",
@@ -30,3 +33,9 @@ var termsArray [
         definition: "To impose involuntary and hopefully swift death on someone."
     }
 ]
+
+Question.create(seedTerms[0], function(err){
+    if(err) {console.log(err)}
+    mongoose.disconnect();
+
+});
