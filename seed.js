@@ -1,5 +1,6 @@
-var connect = require('./db/connect');
-var Question = require('./models/Question.js');
+require('./db/connect');
+var mongoose = require('mongoose');
+var Question = require('./models/Question.js').Question;
 
 var seedTerms = [
     {
@@ -34,8 +35,9 @@ var seedTerms = [
     }
 ]
 
+//Duplicate key error even after dropping test db?
 Question.create(seedTerms[0], function(err){
     if(err) {console.log(err)}
+    else {console.log('done')}
     mongoose.disconnect();
-
 });
