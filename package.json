@@ -28,7 +28,9 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "material-ui": "^0.15.1",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-tap-event-plugin": "^1.0.0"
   }
 }
