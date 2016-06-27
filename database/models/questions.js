@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var questionSchema = new Schema({
-  question_pos: {Number, unique: true},
+  question_pos: Number,
   german: String,
   english: String,
   definition: String,
@@ -10,4 +11,4 @@ var questionSchema = new Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-exports.Question = Question;
+module.exports = Question;
