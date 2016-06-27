@@ -31,3 +31,22 @@ var newGame = function(){
         type: NEW_GAME
     };
 };
+
+var getQuestions = function() {
+    return function(dispatch) {
+        var url = 'http://localhost:8081/questions';
+        return fetch(url).then(function(res) {
+            console.log('Array of terms?: ', res);
+        });
+    }
+}
+
+exports.MAKE_GUESS = MAKE_GUESS;
+exports.makeGuess = makeGuess;
+exports.NEW_GAME = NEW_GAME;
+exports.newGame = newGame;
+
+exports.GET_QUESTIONS_SUCCESS = GET_QUESTIONS_SUCCESS;
+exports.getQuestionsSuccess = getQuestionsSuccess;
+exports.GET_SCORE_ERROR = GET_SCORE_ERROR;
+exports.getQuestionsError = getQuestionsError;
