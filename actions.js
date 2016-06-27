@@ -1,0 +1,30 @@
+var GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
+var getQuestionsSuccess = function(questions) {
+    return {
+        type: GET_QUESTIONS_SUCCESS,
+        questions: questions
+    }
+}
+
+var GET_QUESTIONS_ERROR = 'GET_QUESTIONS_ERROR';
+var getQuestionsError = function(questions) {
+    return {
+        type: GET_QUESTIONS_ERROR,
+        error: errror
+    }
+}
+
+var MAKE_GUESS = 'MAKE_GUESS';
+var makeGuess = function(guess) {
+    return {
+        type: MAKE_GUESS,
+        guess: guess
+    };
+};
+
+var NEW_GAME = 'NEW_GAME';
+var newGame = function(){
+    return {
+        type: NEW_GAME
+    };
+};
