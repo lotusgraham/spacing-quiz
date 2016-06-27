@@ -1,6 +1,6 @@
 {
   "name": "spacing-quiz",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An app that teaches a foreign laguage using spaced repetition",
   "main": "js/index.jsx",
   "scripts": {
