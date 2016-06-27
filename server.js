@@ -2,7 +2,9 @@ var express = require('express'),
     app = express(),
     path = require('path');
 
-var indexRoute = path.join(__dirname, 'index.html');
+var indexRoute = path.join(__dirname, 'build/index.html');
+
+app.use(express.static(path.join(__dirname, 'build/')));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -10,7 +12,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(indexRoute);
 });
 
