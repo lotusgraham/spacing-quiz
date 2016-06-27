@@ -1,3 +1,6 @@
+require('isomorphic-fetch');
+require('es6-promise').polyfill();
+
 var GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
 var getQuestionsSuccess = function(questions) {
     return {
