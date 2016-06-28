@@ -9,6 +9,7 @@ var questionSchema = new Schema({
     german: String,
     english: String,
     definition: String,
+    image: String,
     correct: {
         type: Boolean,
         default: false
