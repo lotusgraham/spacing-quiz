@@ -2,45 +2,67 @@ import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
+import TextField from 'material-ui/TextField';
+import {orange500, blue500, cyan700} from 'material-ui/styles/colors';
+
+class MyButton extends FlatButton {
+  constructor(props){
+    super(props)
+    this.clickHandler = this.clickHandler.bind(this)
+  }
+  clickHandler(){
+    alert('yaaaay');
+  }
+}
 
 
+const styles = {
+  errorStyle: {
+    color: cyan700,
+  }
+};
 
 const QuestionCard = () => (
 
-    <Card style={{width: '80%',
-                margin: '0 auto'}}
-                actAsExpander={true}>
+    <Card style={{width: '60%',
+                margin: '2rem auto'}}
+                >
     <CardHeader
       title="Graham Whitley"
-      subtitle={language[0]}
+      subtitle="German Learnin'"
       avatar="http://lorempixel.com/100/100/nature/"
     />
 
     <CardMedia
-      overlay={<CardTitle title={question.text} subtitle={language[0]} />}
-    >
-      <img src="http://lorempixel.com/600/337/nature/" />
+
+      overlay={<CardTitle title={question.english} subtitle={question.definition} />}
+      >
+      <img   style={{
+          height: '20rem',
+          width: 'auto'
+        }}
+        src="http://buzzsharer.com/wp-content/uploads/2015/06/beautiful-running-horse.jpg" />
     </CardMedia>
-    {/*<CardTitle title="Card title" subtitle="Card subtitle" />*/}
-    {/*<CardText>
-  {question.text}
-    </CardText>*/}
     <CardActions>
-      <FlatButton rippleColor="tomato" labelStyle={{textTransform: 'capitalize'}} style={{textAlign:'left', width:'100%'}} label={question.possibleAnswers[0]} /> <br></br>
-      <FlatButton rippleColor="tomato" labelStyle={{textTransform: 'capitalize'}} style={{textAlign:'left', width:'100%'}} label={question.possibleAnswers[1]} /> <br></br>
-      <FlatButton rippleColor="lime" labelStyle={{textTransform: 'capitalize'}} style={{textAlign:'left', width:'100%'}} label={question.correctAnswer} /><br></br>
-      <FlatButton rippleColor="tomato" labelStyle={{textTransform: 'capitalize'}} style={{textAlign:'left', width:'100%'}} label={question.possibleAnswers[2]} />
+        <TextField
+       hintText="Enter German Word"
+       hintStyle={styles.errorStyle}
+     />
+   <MyButton rippleColor="cyan"
+                  labelStyle={{textTransform: 'capitalize'}}
+                  style={{textAlign:'center', width:'100%'}}
+                  label="Go"
+                  />
     </CardActions>
   </Card>
 );
 
-let language = ["Javascript", "Python", "Ruby"]
 
 let question = {
-    text:'What is the purpose of the DOCTYPE declaration?',
-    correctAnswer:'It tells the browser what type of document your HTML file is.',
-    possibleAnswers:['It tells the HTML file how to render','It tells the DOM where to start','It lets other developers know where the beginning of the code is'],
-    language:'HTML'}
+        question_pos: 2,
+        german: "Pferd",
+        english: "Horse",
+        definition: "A quadripedal animal which may or may not kick you to death."
+    }
 
 export default QuestionCard;
