@@ -17,6 +17,12 @@ app.get('/', function(req, res) {
   res.sendFile(indexRoute);
 });
 
+app.get('/questions', function(req, res) {
+    // res.send() the result pf a db query to show all questions
+});
+
+// TODO: URLs for individual qs.
+
 app.set('port', process.env.NODE_PORT || 3000);
 
 app.listen(app.get('port'),function() {
