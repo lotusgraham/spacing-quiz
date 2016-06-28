@@ -19,14 +19,11 @@ app.use(function(req, res, next) {
 
 app.use(passport.initialize())
 
-app.get('/', function(req, res) {
-    res.sendFile(indexRoute);
-});
-
-app.get('/flashcards/', function(req, res) {
-     Question.find({}, function(err, questions) {
-         res.json(questions);
-     });
+app.get('/flashcards', function(req, res) {
+     Question.find().sort([['question_pos', 'ascending']]).limit(2).exec(function(err, questions) {
+       if (err) console.log(err);
+       res.json(questions);
+     })
 });
 
 app.get('/flashcards/:question_pos', function(req, res) {
