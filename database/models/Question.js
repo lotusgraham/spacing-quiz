@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var questionSchema = new mongoose.Schema({
+var questionSchema = new Schema({
     question_pos: {
         type: Number,
         unique: true
@@ -16,4 +17,4 @@ var questionSchema = new mongoose.Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-exports.Question = Question;
+module.exports = Question;

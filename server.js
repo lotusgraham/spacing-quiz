@@ -5,7 +5,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     app = express(),
     path = require('path'),
-    Question = require('./database/models/Question').Question,
+    Question = require('./database/models/Question'),
     passport = require('passport'),
     User = require('./database/models/user');
 

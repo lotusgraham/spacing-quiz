@@ -1,6 +1,6 @@
 require('./db/connect');
 var mongoose = require('mongoose');
-var Question = require('./models/Question.js').Question;
+var Question = require('./models/Question.js');
 
 var seedTerms = [
     {
