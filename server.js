@@ -1,37 +1,37 @@
-var termsArray [
-    {
-        german: "Apfel",
-        english: "Apple",
-        definition: "A fruit.",
-        correct: false,
-        memorization: 0
-    },
-    {
-        german: "Pferd",
-        english: "Horse",
-        definition: "A quadripedal animal which may or may not kick you to death.",
-        correct: false,
-        memorization: 0
-    },
-    {
-        german: "Schwanz",
-        english: "Dick",
-        definition: "A reference to male anatomy as well as a name to call someone.",
-        correct: false,
-        memorization: 0
-    },
-    {
-        german: "Arsch",
-        english: "Ass",
-        definition: "The bum.",
-        correct: false,
-        memorization: 0
-    },
-    {
-        german: "Morden",
-        english: "To murder (infinitive)",
-        definition: "To impose involuntary and hopefully swift death on someone.",
-        correct: false,
-        memorization: 0
-    }
-]
+require('dotenv').config();
+require('./database/db/connect');
+var express = require('express'),
+    mongoose = require('mongoose'),
+    app = express(),
+    path = require('path'),
+    Question = require('./database/models/questions'),
+    passport = require('passport'),
+    User = require('./database/models/user');
+
+app.use(express.static(path.join(__dirname, 'build/')));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use(passport.initialize())
+
+app.get('/', function(req, res) {
+  res.sendFile(indexRoute);
+});
+
+require('./database/routes/userAuth')(app, passport);
+
+app.get('/users', function(req,res) {
+  User.find({}, function(err, user) {
+    res.json(user);
+  })
+})
+
+app.set('port', process.env.NODE_PORT || 3000);
+
+app.listen(app.get('port'),function() {
+  console.log("Listeing on Port " + app.get('port'));
+});
