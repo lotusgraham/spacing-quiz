@@ -1,6 +1,6 @@
 require('./db/connect');
 var mongoose = require('mongoose');
-var Question = require('./models/Question.js');
+var Question = require('./models/Question');
 
 var seedTerms = [
     {
@@ -49,11 +49,4 @@ var seedTerms = [
 
 Question.collection.drop(); // Resets database for seeding.
 
-Question.collection.insert(seedTerms, onInsert);
-function onInsert(err, docs) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log(docs)
-    }
-}
+Question.create(seedTerms); // seeds each term in the array.

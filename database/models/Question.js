@@ -13,6 +13,10 @@ var questionSchema = new Schema({
     correct: {
         type: Boolean,
         default: false
+    },
+    memorization: {
+        type: Number,
+        default: 0
     }
 });
 
