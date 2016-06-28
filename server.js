@@ -8,9 +8,7 @@ var express = require('express'),
     passport = require('passport'),
     User = require('./database/models/user');
 
-var indexRoute = path.join(__dirname, 'test-index.html');
-
-// app.use(express.static(path.join(__dirname, 'build/')));
+app.use(express.static(path.join(__dirname, 'build/')));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
