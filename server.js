@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 require('./db/connect');
+=======
+>>>>>>> graham/redux-branch
 require('dotenv').config();
 require('./database/db/connect');
 var express = require('express'),
@@ -34,6 +37,7 @@ app.get('/users', function(req,res) {
   User.find({}, function(err, user) {
     res.json(user);
   })
+})
 
 app.set('port', process.env.NODE_PORT || 3000);
 
