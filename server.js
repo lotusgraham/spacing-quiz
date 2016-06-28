@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 require('./db/connect');
+=======
+require('dotenv').config();
+require('./database/db/connect');
+>>>>>>> graham/redux-branch
 var express = require('express'),
+    mongoose = require('mongoose'),
     app = express(),
-    path = require('path');
-
-var indexRoute = path.join(__dirname, 'build/index.html');
+    path = require('path'),
+    Question = require('./database/models/questions'),
+    passport = require('passport'),
+    User = require('./database/models/user');
 
 app.use(express.static(path.join(__dirname, 'build/')));
 
@@ -13,15 +20,27 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(passport.initialize())
+
 app.get('/', function(req, res) {
   res.sendFile(indexRoute);
 });
 
+<<<<<<< HEAD
 app.get('/questions', function(req, res) {
     // res.send() the result pf a db query to show all questions
 });
 
 // TODO: URLs for individual qs.
+=======
+require('./database/routes/userAuth')(app, passport);
+
+app.get('/users', function(req,res) {
+  User.find({}, function(err, user) {
+    res.json(user);
+  })
+})
+>>>>>>> graham/redux-branch
 
 app.set('port', process.env.NODE_PORT || 3000);
 
