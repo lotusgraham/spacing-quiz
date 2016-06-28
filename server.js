@@ -22,13 +22,18 @@ app.use(passport.initialize())
 app.get('/', function(req, res) {
     res.sendFile(indexRoute);
 })
-app.get('/questions', function(req, res) {
-    Question.find({}, function(err, questions) {
-        res.json(questions);
-    });
+app.get('/questions/', function(req, res) {
+     Question.find({}, function(err, questions) {
+         res.json(questions);
+     });
 });
 
-// TODO: URLs for individual qs.
+app.get('/questions/:question_pos', function(req, res) {
+    var params = {'question_pos': req.params.question_pos};
+    Question.findOne(params, function(err, question) {
+        res.send(question)
+    });
+});
 
 require('./database/routes/userAuth')(app, passport);
 
