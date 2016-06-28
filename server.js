@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+require('./db/connect');
+=======
+>>>>>>> graham/redux-branch
 require('dotenv').config();
 require('./database/db/connect');
 var express = require('express'),
@@ -20,7 +24,12 @@ app.use(passport.initialize())
 
 app.get('/', function(req, res) {
   res.sendFile(indexRoute);
+})
+app.get('/questions', function(req, res) {
+    // res.send() the result pf a db query to show all questions
 });
+
+// TODO: URLs for individual qs.
 
 require('./database/routes/userAuth')(app, passport);
 
