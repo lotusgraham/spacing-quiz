@@ -31,6 +31,14 @@ var newGame = function(){
     };
 };
 
+var BUTTON_CLICK = 'BUTTON_CLICK';
+var button = function(){
+    return {
+        type: BUTTON_CLICK
+    };
+};
+
+
 var getQuestions = function() {
     return function(dispatch) {
         var url = 'http://localhost:8081/questions';
@@ -40,6 +48,8 @@ var getQuestions = function() {
     }
 }
 
+exports.BUTTON_CLICK = BUTTON_CLICK;
+exports.buttonClick = buttonClick;
 exports.MAKE_GUESS = MAKE_GUESS;
 exports.makeGuess = makeGuess;
 exports.NEW_GAME = NEW_GAME;
