@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 require('./db/connect');
-=======
->>>>>>> graham/redux-branch
 require('dotenv').config();
 require('./database/db/connect');
+
 var express = require('express'),
     mongoose = require('mongoose'),
     app = express(),
