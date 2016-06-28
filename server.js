@@ -21,14 +21,15 @@ app.use(passport.initialize())
 
 app.get('/', function(req, res) {
     res.sendFile(indexRoute);
-})
-app.get('/questions/', function(req, res) {
+});
+
+app.get('/flashcards/', function(req, res) {
      Question.find({}, function(err, questions) {
          res.json(questions);
      });
 });
 
-app.get('/questions/:question_pos', function(req, res) {
+app.get('/flashcards/:question_pos', function(req, res) {
     var params = {'question_pos': req.params.question_pos};
     Question.findOne(params, function(err, question) {
         res.send(question)
@@ -40,8 +41,8 @@ require('./database/routes/userAuth')(app, passport);
 app.get('/users', function(req, res) {
     User.find({}, function(err, user) {
         res.json(user);
-    })
-})
+    });
+});
 
 app.set('port', process.env.NODE_PORT || 3000);
 
