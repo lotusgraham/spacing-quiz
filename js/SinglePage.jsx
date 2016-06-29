@@ -2,16 +2,25 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import QuestionCard from './QuestionCard'
 import NavBar from './AppBar';
-import LoginPage from './LoginPage'
+import { connect } from 'react-redux'
+
 
 const SinglePage = () => {
       return(
             <div>
                   <NavBar />
-                  <LoginPage />
-                  {/*<QuestionCard />*/}
+                  <QuestionCard />
             </div>
       )
 };
 
-export default SinglePage;
+var mapStateToProps = function(state, props) {
+    return {
+        open: state
+    };
+};
+
+
+var Container = connect(mapStateToProps)(SinglePage);
+
+export default Container;

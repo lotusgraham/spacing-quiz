@@ -6,12 +6,17 @@ import QuestionCard from './QuestionCard'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavBar from './AppBar';
 import SinglePage from './SinglePage';
+import { Provider } from 'react-redux'
+var store = require('../store');
+
 
 
 const App = () => (
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <SinglePage />
-  </MuiThemeProvider>
+  <Provider store={store}>
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <SinglePage />
+    </MuiThemeProvider>
+  </Provider>
 );
 
 ReactDOM.render(
