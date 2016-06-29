@@ -4,11 +4,13 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import QuestionCard from './QuestionCard'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import NavBar from './AppBar';
+import SinglePage from './SinglePage';
 
 
 const App = () => (
   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <QuestionCard />
+      <SinglePage />
   </MuiThemeProvider>
 );
 
