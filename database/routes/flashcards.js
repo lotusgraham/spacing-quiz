@@ -1,21 +1,23 @@
 var Question = require('../models/question');
 
 module.exports = (app) => {
+  let limit = 2;
+
   app.get('/flashcards', (req, res) => {
-    Question.find().sort([['question_pos', 'ascending']]).limit(2).exec(function(err, questions) {
+    Question.find().sort([['question_pos', 'ascending']]).limit(limit).exec(function(err, questions) {
       if (err) console.log(err);
-      res.json(questions);
+      res.json({
+        questions: questions,
+        top: limit + 1
+      });
     });
   });
 
   app.post('/flashcards/next', (req, res) => {
-    var top = 0, right = [], wrong = [];
+    var right = [], wrong = [];
     var promise = new Promise(
       function(resolve, reject) {
-        req.body.forEach(question => {
-          if (question.question_pos > top) {
-            top = question.question_pos;
-          }
+        req.body.questions.forEach(question => {
           if (question.correct && question.memorization < 3) {
             question.correct = false;
             question.memorization += 1;
@@ -29,11 +31,14 @@ module.exports = (app) => {
         resolve();
       }
     ).then(() => {
-      Question.findOne({question_pos: top + 1}, function(err, newQ) {
+      Question.findOne({question_pos: req.body.top}, function(err, newQ) {
         if (err) console.log(err);
-        wrong.push(newQ);
+        if (newQ) wrong.push(newQ);
         let result = wrong.concat(right);
-        res.json(result);
+        res.json({
+          questions: result,
+          top: req.body.top + 1
+        });
       });
     })
   });
