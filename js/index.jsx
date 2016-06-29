@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import QuestionCard from './Popover'
+import QuestionCard from './QuestionCard'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 

@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import {orange500, blue500, cyan700} from 'material-ui/styles/colors';
+import {orange500, cyan700} from 'material-ui/styles/colors';
 
-class MyButton extends FlatButton {
-  constructor(props){
-    super(props)
-    this.clickHandler = this.clickHandler.bind(this)
-  }
-  clickHandler(){
-    alert('yaaaay');
-  }
-}
+// class MyButton extends FlatButton {
+//   constructor(props){
+//     super(props)
+//     this.clickHandler = this.clickHandler.bind(this)
+//   }
+//   clickHandler(){
+//     alert('yaaaay');
+//   }
+// }
 
 
 const styles = {
@@ -22,8 +22,13 @@ const styles = {
   }
 };
 
-const QuestionCard = () => (
+class QuestionCard extends Component {
+  handleClick() {
+    console.log('clicked');
+  }
 
+  render() {
+    return(
     <Card style={{width: '60%',
                 margin: '2rem auto'}}
                 >
@@ -48,14 +53,16 @@ const QuestionCard = () => (
        hintText="Enter German Word"
        hintStyle={styles.errorStyle}
      />
-   <MyButton rippleColor="cyan"
+   <FlatButton rippleColor="cyan"
                   labelStyle={{textTransform: 'capitalize'}}
                   style={{textAlign:'center', width:'100%'}}
                   label="Go"
+                  onClick={this.handleClick}
                   />
     </CardActions>
   </Card>
-);
+  )}
+};
 
 
 let question = {
