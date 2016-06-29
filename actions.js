@@ -1,5 +1,13 @@
 require('isomorphic-fetch');
 
+var GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+var getUserSuccess = function(user){
+    return {
+        type: GET_USER_SUCCESS,
+        user: user
+    }
+}
+
 var GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
 var getQuestionsSuccess = function(questions) {
     return {
@@ -38,25 +46,47 @@ var buttonClick = function() {
     };
 };
 
-
-var getQuestions = function() {
+var getUser = function() {
     return function(dispatch) {
-        var url = 'http://localhost:3000/flashcards';
+        var url = 'http://localhost:3000/user';
         return fetch(url).then(function(res) {
-                console.log('I am the ghost.');
                 if (res.status < 200 || res.status >= 300) {
                     var error = new Error(response.statusText);
                     error.res = res;
                     throw error;
                 }
-                console.log(res);
                 return res;
             })
             .then(function(res) {
                 return res.json();
             })
             .then(function(data) {
+                return dispatch(
+                    getUserSuccess(data)
+                );
+            }).catch(function(error) {
+                return dispatch(
+                    getUserError(error)
+                );
+            })
+    };
+}
 
+var getQuestions = function() {
+    return function(dispatch) {
+        var url = 'http://localhost:3000/flashcards';
+        return fetch(url).then(function(res) {
+                if (res.status < 200 || res.status >= 300) {
+                    var error = new Error(response.statusText);
+                    error.res = res;
+                    throw error;
+                }
+                return res;
+            })
+            .then(function(res) {
+                return res.json();
+            })
+            .then(function(data) {
                 return dispatch(
                     getQuestionsSuccess(data)
                 );
