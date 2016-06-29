@@ -9,7 +9,13 @@ var express = require('express'),
     User = require('./database/models/user'),
     bodyParser = require('body-parser');
 
-app.use(express.static(path.join(__dirname, 'build/')));
+// app.use(express.static(path.join(__dirname, 'build/')));
+
+var index = path.join(__dirname, 'test-index.html');
+
+app.get('/', function(req, res) {
+  res.sendFile(index);
+})
 
 app.use(bodyParser.json());
 

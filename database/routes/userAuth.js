@@ -42,7 +42,7 @@ module.exports = (app, passport) => {
         failureRedirect: '/'
     }),
     function(req, res) {
-        res.send('Logged in!');
+        res.json(req.user);
     }
   );
 };
