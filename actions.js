@@ -9,10 +9,11 @@ var getUserSuccess = function(user){
 }
 
 var GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
-var getQuestionsSuccess = function(questions) {
+var getQuestionsSuccess = function(questions, count) {
     return {
         type: GET_QUESTIONS_SUCCESS,
-        questions: questions
+        questions: questions,
+        count: count
     }
 }
 
@@ -72,9 +73,9 @@ var getUser = function() {
     };
 }
 
-var getQuestions = function() {
+var getQuestions = function(count) {
     return function(dispatch) {
-        var url = 'http://localhost:3000/flashcards';
+        var url = 'http://localhost:3000/flashcards/' + count;
         return fetch(url).then(function(res) {
                 if (res.status < 200 || res.status >= 300) {
                     var error = new Error(response.statusText);
