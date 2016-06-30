@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {orange500, cyan700} from 'material-ui/styles/colors';
-
+import 'isomorphic-fetch';
 // class MyButton extends FlatButton {
 //   constructor(props){
 //     super(props)
@@ -14,6 +14,17 @@ import {orange500, cyan700} from 'material-ui/styles/colors';
 //     alert('yaaaay');
 //   }
 // }
+
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i < vars.length;i++) {
+      var pair = vars[i].split("=");
+      if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+}
 
 
 const styles = {
@@ -26,7 +37,16 @@ class QuestionCard extends Component {
   handleClick() {
     console.log('clicked');
   }
-
+  componentWillMount() {
+    var headers = new Headers({
+      Authorization: 'Bearer ' + getQueryVariable('accessToken')
+    })
+    fetch('/userdetails', {headers: headers}).then(function(res) {
+      return res.json();
+    }).then(function(user) {
+      console.log(user);
+    })
+  }
   render() {
     return(
     <Card style={{width: '60%',

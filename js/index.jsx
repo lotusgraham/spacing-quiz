@@ -4,31 +4,25 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import QuestionCard from './QuestionCard'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Login from './login';
+import { Router, Route, Link, browserHistory } from 'react-router'
 
+const routes = (
+  <Router history={browserHistory}>
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <Route path="/" component={Login}/>
+      <Route path="/quizstart" component={QuestionCard}/>
+    </MuiThemeProvider>
+  </Router>
+)
 
-const App = () => (
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <QuestionCard />
-  </MuiThemeProvider>
-);
+// const App = () => (
+//   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+//       <Login />
+//   </MuiThemeProvider>
+// );
 
 ReactDOM.render(
-  <App />,
+  routes,
   document.getElementById('app')
 );
-
-// console.log('test');
-//
-// var Person = function() {
-//     var name = 'Hello Earth';
-//     return (
-//         <div className="person">
-//             {name}
-//             <CardExampleWithAvatar />
-//         </div>
-//     );
-// };
-//
-// document.addEventListener('DOMContentLoaded', function() {
-//     ReactDOM.render(<Person />, document.getElementById('app'));
-// });

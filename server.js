@@ -7,18 +7,26 @@ var express = require('express'),
     path = require('path'),
     passport = require('passport'),
     Progress = require('./database/models/progress'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    Router = require('react-router'),
+    React = require('react');
 
-app.use(express.static(path.join(__dirname, 'build/')));
 
-// var index = path.join(__dirname, 'test-index.html');
 
-// app.get('/', function(req, res) {
-//   res.sendFile(index);
-// })
+function router (req, res, next) {
+  var context = {
+    routes: routes, location: req.url
+  };
+  Router.create(context).run(function ran (Handler, state) {
+    res.render('layout', {
+      reactHtml: React.renderToString(<Handler />)
+    });
+  });
+}
 
+app.use(router);
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname, 'build/')));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

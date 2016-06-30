@@ -1,7 +1,11 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     User = require('../models/user'),
     Question = require('../models/question'),
-    Progress = require('../models/progress');
+    Progress = require('../models/progress'),
+    path = require('path'),
+    BearerStrategy = require('passport-http-bearer');
+
+let question_page = path.resolve('question-page.html');
 
 module.exports = (app, passport) => {
   // Received a serialize error....solution found on stack overflow. Honestly, can't say i understand it...but it works.
@@ -12,11 +16,27 @@ module.exports = (app, passport) => {
   passport.deserializeUser(function(user, done) {
       done(null, user);
   });
+  // BearerStrategy for returning user details
+  passport.use(new BearerStrategy(
+    function(token, done) {
+      User.findOne({ accessToken: token },
+        function(err, user) {
+          if(err) {
+              return done(err)
+          }
+          if(!user) {
+              return done(null, false)
+          }
+          return done(null, user, { scope: ['https://www.googleapis.com/auth/plus.login'] })
+        }
+      );
+    }
+  ))
   // Using Googles Oauth 2.0
   passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_SECRET,
-        callbackURL: 'http://localhost:3000/quiz-time'
+        callbackURL: 'http://localhost:3000/login/return'
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOneAndUpdate({ // If user doesn't exist, then create. Otherwise, do nothing.
@@ -24,7 +44,8 @@ module.exports = (app, passport) => {
         }, {
             fullName: profile.displayName,
             firstName: profile.name.givenName,
-            avatar: profile.photos[0].value
+            avatar: profile.photos[0].value,
+            accessToken: accessToken
         }, {
             upsert: true,
             new: true,
@@ -35,19 +56,29 @@ module.exports = (app, passport) => {
     })
   );
 
+  // app.get('/quizstart', function(req, res) {
+  //   res.status()
+  // })
+
+  app.get('/userdetails', passport.authenticate('bearer', { session: false }),
+    function(req, res) {
+      res.json(req.user);
+    }
+  )
+
   app.get('/login', passport.authenticate('google', {
       scope: ['https://www.googleapis.com/auth/plus.login'] // scope relates to the info you want back from google.
     })
   );
 
-  app.get('/quiz-time', passport.authenticate('google', {
+  app.get('/login/return', passport.authenticate('google', {
         failureRedirect: '/'
     }),
     function(req, res) {
       Progress.findOne({user: req.user._id}).populate('user').populate('scores.question').exec(function(err, prog) {
         if (err) console.log(err);
         if (prog) { // if user already has a progress....
-          res.json(req.user);
+          res.redirect('/quizstart?accessToken=' + req.user.accessToken);
         }
         else {
           Question.find({}, function(err, questions) { // otherwise create relationship for the user
@@ -61,7 +92,7 @@ module.exports = (app, passport) => {
             })
             newProg.save()
           });
-          res.json(req.user);
+          res.redirect('/test-route?accessToken=' + req.user.accessToken);
         }
       })
     }
