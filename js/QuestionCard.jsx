@@ -8,6 +8,7 @@ import {orange500, cyan700} from 'material-ui/styles/colors';
 // import {initialState} from '../reducers'
 import actions from '../actions'
 import { connect } from 'react-redux'
+import Snackbar from 'material-ui/Snackbar';
 
 
 
@@ -34,8 +35,24 @@ const styles = {
 
 class QuestionCard extends Component {
   constructor(props) {
-    super(props)
-  }
+   super(props);
+   this.state = {
+     open: false,
+   };
+ }
+
+ handleTouchTap() {
+   this.setState({
+     open: true,
+   });
+ };
+
+ handleRequestClose() {
+   this.setState({
+     open: false,
+   });
+ };
+
   handleClick() {
     this.props.dispatch(actions.getQuestionsSuccess(this.props.mappedstate));
     // console.log(this.props.mappedstate);
@@ -72,10 +89,18 @@ class QuestionCard extends Component {
                   labelStyle={{textTransform: 'capitalize'}}
                   style={{textAlign:'center', width:'100%'}}
                   label="Go"
+                  onTouchTap={this.handleTouchTap.bind(this)}
                   onClick={this.handleClick.bind(this)}
                   />
     </CardActions>
+    <Snackbar
+          open={this.state.open}
+          message="Wrong!"
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose.bind(this)}
+        />
   </Card>
+
   )}
 };
 

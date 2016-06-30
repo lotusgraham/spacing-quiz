@@ -1,17 +1,42 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class LoginPage extends React.Component {
- let hotdog = {
-   hotdogs: true
- },
-  render() {
 
+export default class LoginPage extends React.Component {
+
+  constructor(props) {
+   super(props);
+   this.state = {
+     open: false,
+   };
+ }
+
+ handleTouchTap() {
+   this.setState({
+     open: true,
+   });
+ };
+
+ handleRequestClose() {
+   this.setState({
+     open: false,
+   });
+ };
+
+  render() {
     return (
       <div>
-        Hola!
+        <RaisedButton
+          onTouchTap={this.handleTouchTap.bind(this)}
+          label="Add to my calendar"
+        />
+        <Snackbar
+          open={this.state.open}
+          message="Event added to your calendar"
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose.bind(this)}
+        />
       </div>
     );
   }

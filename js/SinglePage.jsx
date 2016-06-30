@@ -2,8 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import QuestionCard from './QuestionCard'
 import NavBar from './AppBar';
-// import { connect } from 'react-redux'
-
+import LoginPage from './LoginPage'
 
 const SinglePage = () => {
       return(
@@ -15,6 +14,8 @@ const SinglePage = () => {
 };
 
 export default SinglePage;
+
+//
 
 //
 // const SinglePage = () => {
