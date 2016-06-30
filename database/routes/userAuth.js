@@ -46,11 +46,11 @@ module.exports = (app, passport) => {
     function(req, res) {
       Progress.findOne({user: req.user._id}).populate('user').populate('scores.question').exec(function(err, prog) {
         if (err) console.log(err);
-        if (prog) {
-          res.json(prog);
+        if (prog) { // if user already has a progress....
+          res.json(req.user);
         }
         else {
-          Question.find({}, function(err, questions) {
+          Question.find({}, function(err, questions) { // otherwise create relationship for the user
             let newProg = new Progress({
               user: req.user._id
             });

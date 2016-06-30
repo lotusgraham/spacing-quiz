@@ -9,13 +9,13 @@ var express = require('express'),
     Progress = require('./database/models/progress'),
     bodyParser = require('body-parser');
 
-// app.use(express.static(path.join(__dirname, 'build/')));
+app.use(express.static(path.join(__dirname, 'build/')));
 
-var index = path.join(__dirname, 'test-index.html');
+// var index = path.join(__dirname, 'test-index.html');
 
-app.get('/', function(req, res) {
-  res.sendFile(index);
-})
+// app.get('/', function(req, res) {
+//   res.sendFile(index);
+// })
 
 app.use(bodyParser.json());
 
