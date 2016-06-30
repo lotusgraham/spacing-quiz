@@ -4,6 +4,11 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {orange500, cyan700} from 'material-ui/styles/colors';
+// import {initialState} from '../reducers'
+import actions from '../actions'
+import { connect } from 'react-redux'
+
+
 
 // class MyButton extends FlatButton {
 //   constructor(props){
@@ -16,6 +21,10 @@ import {orange500, cyan700} from 'material-ui/styles/colors';
 // }
 
 
+// console.log(state);
+
+
+
 const styles = {
   errorStyle: {
     color: cyan700,
@@ -23,8 +32,14 @@ const styles = {
 };
 
 class QuestionCard extends Component {
+  constructor(props) {
+    super(props)
+  }
   handleClick() {
-    console.log('clicked');
+    this.props.dispatch(actions.getQuestionsSuccess(this.props.mappedstate.questions, this.props.mappedstate.count));
+    // console.log(this.props.mappedstate);
+
+    // console.log(state);
   }
 
   render() {
@@ -39,8 +54,7 @@ class QuestionCard extends Component {
     />
 
     <CardMedia
-
-      overlay={<CardTitle title={question.english} subtitle={question.definition} />}
+      overlay={<CardTitle title={this.props.mappedstate.questions.english} subtitle={question[0].definition} />}
       >
       <img   style={{
           height: '20rem',
@@ -57,7 +71,7 @@ class QuestionCard extends Component {
                   labelStyle={{textTransform: 'capitalize'}}
                   style={{textAlign:'center', width:'100%'}}
                   label="Go"
-                  onClick={this.handleClick}
+                  onClick={this.handleClick.bind(this)}
                   />
     </CardActions>
   </Card>
@@ -111,11 +125,17 @@ var question = [
     }
 ]
 
-let question = {
-        question_pos: 2,
-        german: "Pferd",
-        english: "Horse",
-        definition: "A quadripedal animal which may or may not kick you to death."
-    }
 
-export default QuestionCard;
+
+var mapStateToProps = function(state, props) {
+    return {
+        mappedstate: state
+    };
+};
+
+
+var Container = connect(mapStateToProps)(QuestionCard);
+
+
+
+module.exports = Container;

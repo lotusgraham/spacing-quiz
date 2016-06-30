@@ -6,23 +6,32 @@ import QuestionCard from './QuestionCard'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavBar from './AppBar';
 import SinglePage from './SinglePage';
-import { Provider } from 'react-redux'
+import LoginPage from './LoginPage';
+import {Provider} from 'react-redux'
 var store = require('../store');
+import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {Router, Route, browserHistory} from 'react-router'
+import {syncHistoryWithStore, routerReducer} from 'react-router-redux'
+
+const history = syncHistoryWithStore(browserHistory, store)
 
 
 
 const App = () => (
-  <Provider store={store}>
-    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-        <SinglePage />
-    </MuiThemeProvider>
-  </Provider>
+    <Provider store={store}>
+
+        <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+            <Router history={history}>
+                <Route path="/" component={LoginPage}/>
+                <Route path="/app" component={Singlepage}/>
+            </Router>
+        </MuiThemeProvider>
+
+    </Provider>
 );
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+    <App/>, document.getElementById('app'));
 
 // console.log('test');
 //

@@ -14,13 +14,4 @@ const SinglePage = () => {
       )
 };
 
-var mapStateToProps = function(state, props) {
-    return {
-        open: state
-    };
-};
-
-
-var Container = connect(mapStateToProps)(SinglePage);
-
-export default Container;
+export default SinglePage;
