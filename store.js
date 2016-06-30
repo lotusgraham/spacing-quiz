@@ -5,5 +5,5 @@ var thunk = require('redux-thunk').default;
 
 var reducers = require('./reducers');
 
-var store = createStore(reducers.questionsReducer, applyMiddleware(thunk));
+var store = createStore(reducers.flashCardsReducer, applyMiddleware(thunk));
 module.exports = store;

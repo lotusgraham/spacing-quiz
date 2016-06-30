@@ -5,11 +5,19 @@ var express = require('express'),
     mongoose = require('mongoose'),
     app = express(),
     path = require('path'),
-    Question = require('./database/models/Question'),
     passport = require('passport'),
-    User = require('./database/models/user');
+    Progress = require('./database/models/progress'),
+    bodyParser = require('body-parser');
 
 app.use(express.static(path.join(__dirname, 'build/')));
+
+// var index = path.join(__dirname, 'test-index.html');
+
+// app.get('/', function(req, res) {
+//   res.sendFile(index);
+// })
+
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -17,31 +25,16 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use(passport.initialize())
+app.use(passport.initialize());
 
-app.get('/', function(req, res) {
-    res.sendFile(indexRoute);
-})
-app.get('/questions/', function(req, res) {
-     Question.find({}, function(err, questions) {
-         res.json(questions);
-     });
-});
-
-app.get('/questions/:question_pos', function(req, res) {
-    var params = {'question_pos': req.params.question_pos};
-    Question.findOne(params, function(err, question) {
-        res.send(question)
-    });
-});
-
+require('./database/routes/flashcards')(app);
 require('./database/routes/userAuth')(app, passport);
 
-app.get('/users', function(req, res) {
-    User.find({}, function(err, user) {
-        res.json(user);
-    })
-})
+app.get('/getInfo', function(req, res) {
+    Progress.find({}).populate('user').populate('scores.question').exec((err, info) => {
+      res.json(info);
+    });
+});
 
 app.set('port', process.env.NODE_PORT || 3000);
 
