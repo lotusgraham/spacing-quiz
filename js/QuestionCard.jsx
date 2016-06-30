@@ -5,15 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {orange500, cyan700} from 'material-ui/styles/colors';
 import 'isomorphic-fetch';
-// class MyButton extends FlatButton {
-//   constructor(props){
-//     super(props)
-//     this.clickHandler = this.clickHandler.bind(this)
-//   }
-//   clickHandler(){
-//     alert('yaaaay');
-//   }
-// }
+
 
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);

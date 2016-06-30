@@ -8,23 +8,8 @@ var express = require('express'),
     passport = require('passport'),
     Progress = require('./database/models/progress'),
     bodyParser = require('body-parser'),
-    Router = require('react-router'),
-    React = require('react');
+    index = path.join(__dirname, 'build/index.html');
 
-
-
-function router (req, res, next) {
-  var context = {
-    routes: routes, location: req.url
-  };
-  Router.create(context).run(function ran (Handler, state) {
-    res.render('layout', {
-      reactHtml: React.renderToString(<Handler />)
-    });
-  });
-}
-
-app.use(router);
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'build/')));
 app.use(function(req, res, next) {
@@ -43,6 +28,10 @@ app.get('/getInfo', function(req, res) {
       res.json(info);
     });
 });
+
+app.get('/*', function(req, res) {
+  res.sendFile(index);
+}) // return index page on all unhandled routes
 
 app.set('port', process.env.NODE_PORT || 3000);
 

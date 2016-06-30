@@ -56,10 +56,6 @@ module.exports = (app, passport) => {
     })
   );
 
-  // app.get('/quizstart', function(req, res) {
-  //   res.status()
-  // })
-
   app.get('/userdetails', passport.authenticate('bearer', { session: false }),
     function(req, res) {
       res.json(req.user);
@@ -92,7 +88,7 @@ module.exports = (app, passport) => {
             })
             newProg.save()
           });
-          res.redirect('/test-route?accessToken=' + req.user.accessToken);
+          res.redirect('/quizstart?accessToken=' + req.user.accessToken);
         }
       })
     }

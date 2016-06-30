@@ -8,19 +8,13 @@ import Login from './login';
 import { Router, Route, Link, browserHistory } from 'react-router'
 
 const routes = (
-  <Router history={browserHistory}>
-    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+    <Router history={browserHistory}>
       <Route path="/" component={Login}/>
       <Route path="/quizstart" component={QuestionCard}/>
-    </MuiThemeProvider>
-  </Router>
+    </Router>
+  </MuiThemeProvider>
 )
-
-// const App = () => (
-//   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-//       <Login />
-//   </MuiThemeProvider>
-// );
 
 ReactDOM.render(
   routes,
