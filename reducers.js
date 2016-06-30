@@ -1,27 +1,11 @@
 var actions = require('./actions');
 var update = require('react-addons-update');
 
-// let initialState = {
-//   "english": "Horse",
-//   "definition": "A quadripedal animal which may or may not kick you to death.",
-//   "image": "http://buzzsharer.com/wp-content/uploads/2015/06/beautiful-running-horse.jpg"
-//   }
-
-
-var initialState;
-
-
-  fetch('dummy').then(function(response) {
-  var contentType = response.headers.get("content-type");
-  if(contentType && contentType.indexOf("application/json") !== -1) {
-    return response.json().then(function(json) {
-       initialState = json
-   console.log(typeof json);
-    });
-  } else {
-    console.log("Oops, we haven't got JSON!");
+let initialState = {
+  "english": "Horse",
+  "definition": "A quadripedal animal which may or may not kick you to death.",
+  "image": "http://buzzsharer.com/wp-content/uploads/2015/06/beautiful-running-horse.jpg"
   }
-});
 
 
     // let i = 0;

@@ -1,11 +1,11 @@
 require('./database/db/connect');
-// require('dotenv').config();
+require('dotenv').config();
 
 var express = require('express'),
     mongoose = require('mongoose'),
     app = express(),
     path = require('path'),
-    // passport = require('passport'),
+    passport = require('passport'),
     Progress = require('./database/models/progress'),
     bodyParser = require('body-parser');
 
@@ -25,19 +25,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-// app.use(passport.initialize());
+app.use(passport.initialize());
 
 require('./database/routes/flashcards')(app);
-// require('./database/routes/userAuth')(app, passport);
-
-app.get('/dummy', function(req,res){
-    var dummydata = {
-      "english": "Horsey",
-      "definition": "A quadripedal animal which may or may not kick you to death.",
-      "image": "http://buzzsharer.com/wp-content/uploads/2015/06/beautiful-running-horse.jpg"
-  };
-  res.json(dummydata);
-});
+require('./database/routes/userAuth')(app, passport);
 
 app.get('/getInfo', function(req, res) {
     Progress.find({}).populate('user').populate('scores.question').exec((err, info) => {
