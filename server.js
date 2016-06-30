@@ -6,7 +6,7 @@ var express = require('express'),
     app = express(),
     path = require('path'),
     passport = require('passport'),
-    User = require('./database/models/user'),
+    Progress = require('./database/models/progress'),
     bodyParser = require('body-parser');
 
 // app.use(express.static(path.join(__dirname, 'build/')));
@@ -30,9 +30,9 @@ app.use(passport.initialize());
 require('./database/routes/flashcards')(app);
 require('./database/routes/userAuth')(app, passport);
 
-app.get('/users', function(req, res) {
-    User.find({}, function(err, user) {
-        res.json(user);
+app.get('/getInfo', function(req, res) {
+    Progress.find({}).populate('user').populate('scores.question').exec((err, info) => {
+      res.json(info);
     });
 });
 

@@ -1,22 +1,48 @@
-var Question = require('../models/question');
+var Progress = require('../models/progress');
 
 module.exports = (app) => {
 
-  app.get('/flashcards/:id?', (req, res) => { // get the first 2 questions.
-    if (req.params.id) {
-      Question.find({question_pos: req.params.id}, function(err, question) {
-        res.json(question);
-      })
-    }
-    else {
-      Question.find().sort([['question_pos', 'ascending']]).limit(1).exec(function(err, question) {
-        if (err) console.log(err);
-        res.json(question);
+  app.get('/flashcards/:id', (req, res) => {
+    Progress.find({'user': req.params.id}).populate('scores.question').exec((err, q) => {
+      q = q[0].scores.sort((a, b) => {
+        if (a.mem_score > b.mem_score) {
+          return 1;
+        }
+        if (a.mem_score < b.mem_score) {
+          return -1;
+        }
+        return 0;
       });
-    }
+      res.json({
+        german: q[0].question.german,
+        definition: q[0].question.definition,
+        image: q[0].question.image
+      });
+    });
   });
 
-  //app.post('/flashcards/next', (req, res) => { // subsequent for next questions.
+  app.post('/flashcards/check/:id', (req, res) => {
+    Progress.findOne({'user': req.params.id}).populate('scores.question').exec((err, x) => {
+      x.scores.forEach(q => {
+        // console.log(q.question.english);
+        if (q.question.german === req.body.german) {
+          if (q.question.english === req.body.english) {
+            q.mem_score += 1
+            x.save();
+            res.send(true);
+          }
+          else {
+            q.mem_score -= 1
+            x.save();
+            res.send(false);
+          }
+        }
+      })
+    })
+  })
+
+  //  The old and over complicated Al.....
+  // app.post('/flashcards/next', (req, res) => { // subsequent for next questions.
   //   var right = [], wrong = []; // buckets for sorting
   //   var promise = new Promise(
   //     function(resolve, reject) {
