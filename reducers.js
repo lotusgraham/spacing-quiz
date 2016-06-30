@@ -3,7 +3,7 @@ var update = require('react-addons-update');
 
 // let initialState = {
 //   "english": "Horse",
-//   "definition": "A quadripedal animal which may or may not kick you to death.",
+//   "definition": "A quadripedal animal which may or may not kick you to death.", huuuhhuhu
 //   "image": "http://buzzsharer.com/wp-content/uploads/2015/06/beautiful-running-horse.jpg"
 //   }
 
