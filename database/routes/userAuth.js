@@ -1,5 +1,7 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-    User = require('../models/user');
+    User = require('../models/user'),
+    Question = require('../models/question'),
+    Progress = require('../models/progress');
 
 module.exports = (app, passport) => {
   // Received a serialize error....solution found on stack overflow. Honestly, can't say i understand it...but it works.
@@ -42,7 +44,26 @@ module.exports = (app, passport) => {
         failureRedirect: '/'
     }),
     function(req, res) {
-        res.json(req.user);
+      Progress.findOne({user: req.user._id}).populate('user').populate('scores.question').exec(function(err, prog) {
+        if (err) console.log(err);
+        if (prog) { // if user already has a progress....
+          res.json(req.user);
+        }
+        else {
+          Question.find({}, function(err, questions) { // otherwise create relationship for the user
+            let newProg = new Progress({
+              user: req.user._id
+            });
+            questions.forEach(q => {
+              newProg.scores.push({
+                question: q._id,
+              });
+            })
+            newProg.save()
+          });
+          res.json(req.user);
+        }
+      })
     }
   );
 };

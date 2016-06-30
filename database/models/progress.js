@@ -2,23 +2,24 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var progressSchema = new Schema({
-  googleID: { type: String, index: true },
-  progress: [ // new progress obj per day
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  scores: [
     {
-      date: { type: Date, default: Date.now },
-      scores: [ // start empty?????
-        {
-          questions_id: Schema.Types.ObjectId,
-          times_answered: Number
-        }
-      ]
+      question: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question'
+      },
+      mem_score: {
+        type: Number,
+        default: 5
+      }
     }
   ]
 });
 
-/*
-{
-  id:
-  allScores: [{date, [scores]}, {date, [scores]}]
-}
-*/
+var Progress = mongoose.model('Progress', progressSchema);
+
+module.exports = Progress;
