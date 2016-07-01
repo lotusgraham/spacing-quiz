@@ -106,7 +106,7 @@ handleRequestClose() {
     </CardActions>
     <Snackbar
      open={this.state.open}
-     message={this.props.question.correct}
+     message={this.props.state.question.correct}
      autoHideDuration={4000}
      onRequestClose={this.handleRequestClose.bind(this)}
    />

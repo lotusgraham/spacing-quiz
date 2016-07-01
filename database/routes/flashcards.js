@@ -15,7 +15,6 @@ module.exports = (app) => {
         }
         return 0
       });
-      console.log(q[0]);
       res.json({
         english: q[0].question.english,
         definition: q[0].question.definition,

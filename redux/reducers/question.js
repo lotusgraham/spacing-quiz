@@ -5,18 +5,22 @@ const initialState = {
   english: null,
   definition: null,
   image: null,
-  correct: null
+  correct: "null"
 }
 
 exports.questionReducer = function(state, action) {
   state = state || initialState;
+  let answer = action.check ? "Right" : "Wrong";
   if (action.type === 'SHOW_QUESTION') {
+    console.log("this is our state::", state);
+    console.log("this is our answer::", answer);
+
     let newState = update(state, {
       $set: {
         english: action.question.english,
         definition: action.question.definition,
         image: action.question.image,
-        correct: null
+        correct: state.correct
       }
     })
     state = newState;
@@ -27,7 +31,7 @@ exports.questionReducer = function(state, action) {
         english: state.english,
         definition: state.definition,
         image: state.image,
-        correct: action.check
+        correct: answer
       }
     })
     state = newState;
