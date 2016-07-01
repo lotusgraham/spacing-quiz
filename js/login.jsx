@@ -5,3 +5,6 @@ export default class Login extends Component {
     return <a href="/login">Login with Google</a>
   }
 }
+
+
+// this.props.state.question.correct
