@@ -6,7 +6,7 @@ var userSchema = new Schema({
   fullName: String,
   firstName: String,
   avatar: String,
-  score: { type: Number, default: 0 }
+  accessToken: String
 });
 
 var User = mongoose.model('User', userSchema);
