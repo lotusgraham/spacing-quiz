@@ -7,21 +7,19 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 //   }
 // }
 
-
+const labels = {
+  margin: '10rem auto',
+};
 
 const style = {
-  margin: 12,
+  margin: '5rem 40%',
 };
 
 var Login = React.createClass({
   render: function() {
     return (
       <div>
-        <Card style={{width: '60%',
-                    margin: '2rem auto'}}
-            containerStyle={{margin: '5rem'}}>
-          <RaisedButton label="Login with Google" linkButton={true} href="/login" secondary={true} style={style} />
-        </Card>
+          <RaisedButton bodyStyle={labels} label="Login with Google" linkButton={true} href="/login" secondary={true} style={style} />
       </div>
     );
   }
