@@ -77,8 +77,7 @@ var seedTerms = [
 ]
 
     Question.collection.drop(); // Resets database for seeding.
-    // User.collection.drop();
 
-    Question.create(seedTerms); // seeds each term in the array.
-
-    process.exit(0);
+    Question.insertMany(seedTerms, function() {      
+      process.exit(0);
+    }); // seeds each term in the array.
