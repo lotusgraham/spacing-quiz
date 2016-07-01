@@ -8,6 +8,7 @@ import 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import userActions from '../redux/actions/user';
 import questionActions from '../redux/actions/question';
+import Snackbar from 'material-ui/Snackbar';
 
 
 function getQueryVariable(variable) {
@@ -21,10 +22,6 @@ function getQueryVariable(variable) {
   }
 }
 
-function qGrab(id) {
-
-}
-
 const styles = {
   errorStyle: {
     color: cyan700,
@@ -36,9 +33,23 @@ class QuestionCard extends Component {
     super(props);
     this.getInput = this.getInput.bind(this);
     this.state = {
-      guess: null
+      guess: null,
+      open: false
     }
   }
+
+handleTouchTap() {
+  this.setState({
+    open: true,
+  });
+}
+
+handleRequestClose() {
+  this.setState({
+    open: false,
+  });
+}
+
   handleClick() {
     console.log(this.props.state);
     let english = this.props.state.question.english;
@@ -88,9 +99,16 @@ class QuestionCard extends Component {
                   labelStyle={{textTransform: 'capitalize'}}
                   style={{textAlign:'center', width:'100%'}}
                   label="Go"
+                  onTouchTap={this.handleTouchTap.bind(this)}
                   onClick={this.handleClick.bind(this)}
                   />
     </CardActions>
+    <Snackbar
+       open={this.state.open}
+       message={this.props.question.correct}
+       autoHideDuration={4000}
+       onRequestClose={this.handleRequestClose.bind(this)}
+     />
   </Card>
   )}
 };
