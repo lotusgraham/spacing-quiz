@@ -20,7 +20,7 @@
     "postinstall": "npm run build",
     "start": "nf start"
   },
-  "engine": {
+  "engines": {
     "node": "6.2.0"
   },
   "author": "",
@@ -48,6 +48,7 @@
     "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "webpack": "^1.13.1"
   }
 }
