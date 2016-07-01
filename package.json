@@ -5,10 +5,11 @@
   "main": "js/index.jsx",
   "scripts": {
     "mkdir": "mkdir -p build",
-    "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:js",
+    "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:imgs && npm run build:css && npm run build:js",
     "watch": "npm run watch:html & npm run watch:css & npm run watch:js",
     "clean": "rm -rf build",
     "build:html": "npm run clean:html && cp index.html build/",
+    "build:imgs": "cp -R images/ build/images",
     "watch:html": "npm run build:html && chokidar index.html -c 'npm run build:html'",
     "clean:html": "rm -f build/index.html",
     "build:css": "npm run clean:css && cp style.css build/",
@@ -16,7 +17,10 @@
     "clean:css": "rm -f build/style.css",
     "build:js": "npm run clean:js && webpack",
     "watch:js": "npm run build:js && webpack --watch",
-    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map"
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map",
+    "seed":"node database/seed.js",
+    "serve-back": "seed && node server.js",
+    "serve-front": "npm run build && webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
