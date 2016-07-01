@@ -31,12 +31,12 @@ module.exports = (app) => {
         // console.log(q.question.english);
         if (q.question.english === req.body.english) {
           if (q.question.german === req.body.german) {
-            q.mem_score += 1
+            q.mem_score += 2
             x.save();
             res.send(true);
           }
           else {
-            q.mem_score -= 1
+            q.mem_score += 1
             x.save();
             res.send(false);
           }

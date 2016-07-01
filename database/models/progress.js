@@ -14,7 +14,7 @@ var progressSchema = new Schema({
       },
       mem_score: {
         type: Number,
-        default: 5
+        default: 0
       }
     }
   ]
