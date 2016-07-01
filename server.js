@@ -33,7 +33,7 @@ app.get('/*', function(req, res) {
   res.sendFile(index);
 }) // return index page on all unhandled routes
 
-app.set('port', process.env.NODE_PORT || 3000);
+app.set('port', process.env.NODE_PORT || 8081);
 
 app.listen(app.get('port'), function() {
     console.log("Listeing on Port " + app.get('port'));

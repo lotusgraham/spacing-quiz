@@ -18,8 +18,7 @@
     "build:js": "npm run clean:js && webpack",
     "watch:js": "npm run build:js && webpack --watch",
     "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map",
-    "seed":"node database/seed.js",
-    "serve-back": "seed && node server.js",
+    "serve-back": "node database/seed.js && node server.js",
     "serve-front": "npm run build && webpack-dev-server"
   },
   "author": "",
