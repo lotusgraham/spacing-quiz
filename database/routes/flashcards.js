@@ -5,6 +5,7 @@ module.exports = (app) => {
   app.get('/flashcards/:id', (req, res) => {
     // if match
     Progress.find({'user': req.params.id}).populate('scores.question').exec((err, q) => {
+      console.log(q[0]);
       q = q[0].scores.sort((a, b) => {
         if (a.mem_score > b.mem_score) {
           return 1;

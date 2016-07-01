@@ -5,8 +5,6 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     path = require('path'),
     BearerStrategy = require('passport-http-bearer');
 
-let question_page = path.resolve('question-page.html');
-
 module.exports = (app, passport) => {
   // Received a serialize error....solution found on stack overflow. Honestly, can't say i understand it...but it works.
   passport.serializeUser(function(user, done) {
@@ -33,9 +31,10 @@ module.exports = (app, passport) => {
     }
   ))
   // Using Googles Oauth 2.0
+  // had to hard code from .env file. TODO: Ask simon how to import safely!
   passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
+        clientID: "1451419795-k48hiumgo5m8vjedi2ftb6u13hvb635f.apps.googleusercontent.com",
+        clientSecret: "Cp8k8nleYTsSeHx0J-hoIn_6",
         callbackURL: 'http://localhost:3000/login/return'
     },
     function(accessToken, refreshToken, profile, done) {

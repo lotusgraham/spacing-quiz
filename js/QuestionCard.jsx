@@ -49,7 +49,7 @@ class QuestionCard extends Component {
   }
   componentWillMount() {
     this.props.dispatch(userActions.fetchUser());
-    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 250)
+    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 500)
   }
   getInput(e) {
     console.log(e.target.value);
