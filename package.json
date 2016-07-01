@@ -18,6 +18,9 @@
     "watch:js": "npm run build:js && webpack --watch",
     "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map"
   },
+  "engine": {
+    "node": "6.2.0"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
