@@ -1,4 +1,8 @@
+<<<<<<< HEAD:database/db/config.js
 exports.config = {
+=======
+module.exports = {
+>>>>>>> mvp-working:database/db/config.js
     "production": {
         "url": process.env.MONGODB_URI
     },
