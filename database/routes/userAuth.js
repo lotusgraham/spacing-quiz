@@ -31,9 +31,10 @@ module.exports = (app, passport) => {
     }
   ))
   // Using Googles Oauth 2.0
+  // had to hard code from .env file. TODO: Ask simon how to import safely!
   passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
+        clientID: "1451419795-k48hiumgo5m8vjedi2ftb6u13hvb635f.apps.googleusercontent.com",
+        clientSecret: "Cp8k8nleYTsSeHx0J-hoIn_6",
         callbackURL: 'http://localhost:3000/login/return'
     },
     function(accessToken, refreshToken, profile, done) {
