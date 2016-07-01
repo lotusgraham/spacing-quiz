@@ -5,6 +5,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {orange500, cyan700} from 'material-ui/styles/colors';
 import 'isomorphic-fetch';
+import { connect } from 'react-redux';
+import userActions from '../redux/actions/user';
+import questionActions from '../redux/actions/question';
 
 
 function getQueryVariable(variable) {
@@ -18,6 +21,9 @@ function getQueryVariable(variable) {
   }
 }
 
+function qGrab(id) {
+
+}
 
 const styles = {
   errorStyle: {
@@ -26,18 +32,30 @@ const styles = {
 };
 
 class QuestionCard extends Component {
+  constructor(props) {
+    super(props);
+    this.getInput = this.getInput.bind(this);
+    this.state = {
+      guess: null
+    }
+  }
   handleClick() {
-    console.log('clicked');
+    console.log(this.props.state);
+    let english = this.props.state.question.english;
+    let guess = this.state.guess;
+    let id = this.props.state.user.id;
+    this.props.dispatch(questionActions.checkAnswer(english, guess, id));
+    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 250);
   }
   componentWillMount() {
-    var headers = new Headers({
-      Authorization: 'Bearer ' + getQueryVariable('accessToken')
-    })
-    fetch('/userdetails', {headers: headers}).then(function(res) {
-      return res.json();
-    }).then(function(user) {
-      console.log(user);
-    })
+    this.props.dispatch(userActions.fetchUser());
+    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 250)
+  }
+  getInput(e) {
+    console.log(e.target.value);
+    this.setState({
+      guess: e.target.value
+    });
   }
   render() {
     return(
@@ -45,31 +63,32 @@ class QuestionCard extends Component {
                 margin: '2rem auto'}}
                 >
     <CardHeader
-      title="Graham Whitley"
+      title={this.props.state.user.fullName}
       subtitle="German Learnin'"
-      avatar="http://lorempixel.com/100/100/nature/"
+      avatar={this.props.state.user.avatar}
     />
 
     <CardMedia
 
-      overlay={<CardTitle title={question.english} subtitle={question.definition} />}
+      overlay={<CardTitle title={this.props.state.question.english} subtitle={this.props.state.question.definition} />}
       >
       <img   style={{
           height: '20rem',
           width: 'auto'
         }}
-        src="http://buzzsharer.com/wp-content/uploads/2015/06/beautiful-running-horse.jpg" />
+        src={this.props.state.question.image} />
     </CardMedia>
     <CardActions>
         <TextField
        hintText="Enter German Word"
        hintStyle={styles.errorStyle}
+       onChange={this.getInput}
      />
    <FlatButton rippleColor="cyan"
                   labelStyle={{textTransform: 'capitalize'}}
                   style={{textAlign:'center', width:'100%'}}
                   label="Go"
-                  onClick={this.handleClick}
+                  onClick={this.handleClick.bind(this)}
                   />
     </CardActions>
   </Card>
@@ -77,11 +96,12 @@ class QuestionCard extends Component {
 };
 
 
-let question = {
-        question_pos: 2,
-        german: "Pferd",
-        english: "Horse",
-        definition: "A quadripedal animal which may or may not kick you to death."
-    }
+var mapStateToProps = function(state, props) {
+  return {
+    state: state
+  };
+};
 
-export default QuestionCard;
+const Container = connect(mapStateToProps)(QuestionCard);
+
+export default Container;

@@ -5,14 +5,18 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import QuestionCard from './QuestionCard'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Login from './login';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Router, Route, Link, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
 
 const routes = (
   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-    <Router history={browserHistory}>
-      <Route path="/" component={Login}/>
-      <Route path="/quizstart" component={QuestionCard}/>
-    </Router>
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        <Route path="/" component={Login}/>
+        <Route path="/quizstart" component={QuestionCard}/>
+      </Router>
+    </Provider>
   </MuiThemeProvider>
 )
 
