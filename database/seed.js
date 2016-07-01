@@ -50,3 +50,5 @@ var seedTerms = [
 Question.collection.drop(); // Resets database for seeding.
 
 Question.create(seedTerms); // seeds each term in the array.
+
+mongoose.disconnect();

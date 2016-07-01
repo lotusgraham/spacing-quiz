@@ -17,7 +17,7 @@
     "build:js": "npm run clean:js && webpack",
     "watch:js": "npm run build:js && webpack --watch",
     "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map",
-    "postinstall": "npm run build"
+    "postinstall": "node database/seed.js && npm run build"
   },
   "engines": {
     "node": "6.2.0"

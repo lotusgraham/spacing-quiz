@@ -5,8 +5,6 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     path = require('path'),
     BearerStrategy = require('passport-http-bearer');
 
-let question_page = path.resolve('question-page.html');
-
 module.exports = (app, passport) => {
   // Received a serialize error....solution found on stack overflow. Honestly, can't say i understand it...but it works.
   passport.serializeUser(function(user, done) {
