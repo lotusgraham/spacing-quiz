@@ -1,6 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     User = require('../models/user'),
-    Question = require('../models/question'),
+    Question = require('../models/Question'),
     Progress = require('../models/progress'),
     path = require('path'),
     BearerStrategy = require('passport-http-bearer');
