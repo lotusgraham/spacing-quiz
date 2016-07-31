@@ -52,7 +52,7 @@ handleRequestClose() {
 }
 
   handleClick() {
-    console.log(this.props.state);
+    // console.log(this.props.state);
     let english = this.props.state.question.english;
     let guess = this.state.guess;
     let id = this.props.state.user.id;
@@ -64,7 +64,7 @@ handleRequestClose() {
     setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 500)
   }
   getInput(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     this.setState({
       guess: e.target.value
     });

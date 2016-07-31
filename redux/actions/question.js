@@ -5,7 +5,7 @@ function getQuestion(id) {
     return fetch('/flashcards/' + id).then(res => {
       return res.json();
     }).then(data => {
-      console.log(data);
+      // console.log(data);
       return dispatch(showQuestion(data))
     })
   }
@@ -40,7 +40,7 @@ function checkAnswer(english, german, id) {
 }
 
 function checked(check) {
-  console.log(check);
+  // console.log(check);
   return {
     type: 'CHECK',
     check: check

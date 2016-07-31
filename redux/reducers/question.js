@@ -12,8 +12,8 @@ exports.questionReducer = function(state, action) {
   state = state || initialState;
   let answer = action.check ? "Right" : "Wrong";
   if (action.type === 'SHOW_QUESTION') {
-    console.log("this is our state::", state);
-    console.log("this is our answer::", answer);
+    // console.log("this is our state::", state);
+    // console.log("this is our answer::", answer);
 
     let newState = update(state, {
       $set: {
