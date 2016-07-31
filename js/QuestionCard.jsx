@@ -61,6 +61,7 @@ handleRequestClose() {
   componentWillMount() {
     console.log(getQueryVariable('accessToken'));
     this.props.dispatch(userActions.fetchUser(getQueryVariable('accessToken')));
+    console.log("User: ", this.props.state.user)
     setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 1000)
   }
   getInput(e) {
