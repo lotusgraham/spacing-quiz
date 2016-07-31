@@ -11,7 +11,7 @@ function getQueryVariable(variable) {
 
 function fetchUser() {
   var headers = new Headers({
-    Authorization: 'Bearer ' + getQueryVariable()
+    Authorization: 'Bearer ' + getQueryVariable('accessToken')
   })
   return function(dispatch) {
     return fetch('/userdetails', {headers: headers}).then(function(res) {
