@@ -51,24 +51,21 @@ handleRequestClose() {
 }
 
   handleClick() {
-    // console.log(this.props.state);
+    console.log(this.props.state);
     let english = this.props.state.question.english;
     let guess = this.state.guess;
     let id = this.props.state.user.id;
     this.props.dispatch(questionActions.checkAnswer(english, guess, id));
     setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 250);
   }
-  componentWillMount() {
-    console.log(getQueryVariable('accessToken'));
-    this.props.dispatch(userActions.fetchUser(getQueryVariable('accessToken')));
-    console.log("User: ", this.props.state.user)
-    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 1000)
-  }
   getInput(e) {
-    // console.log(e.target.value);
     this.setState({
       guess: e.target.value
     });
+  }
+  componentDidMount() {
+    setTimeout(() => { this.props.dispatch(userActions.fetchUser(getQueryVariable('accessToken'))) }, 250);
+    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 1000)
   }
   render() {
     return(

@@ -66,6 +66,7 @@ module.exports = (app, passport) => {
 
   app.get('/userdetails', passport.authenticate('bearer', { session: false }),
     function(req, res) {
+      console.log('Route: ', req.user);
       res.json(req.user);
     }
   )

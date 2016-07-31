@@ -12,14 +12,14 @@ import SinglePage from './SinglePage'
 
 
 const routes = (
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <Router history={browserHistory}>
         <Route path="/" component={Login}/>
         <Route path="/quizstart" component={SinglePage}/>
       </Router>
-    </Provider>
-  </MuiThemeProvider>
+    </MuiThemeProvider>
+  </Provider>
 )
 
 ReactDOM.render(

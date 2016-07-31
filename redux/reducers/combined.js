@@ -1,11 +1,12 @@
-var combineReducers = require('redux').combineReducers;
+// var combineReducers = require('redux').combineReducers;
+import { combineReducers } from 'redux';
 
-var user = require('./user').userReducer;
-var question = require('./question').questionReducer;
+import { userReducer } from './user';
+import { questionReducer } from './question';
 
-var reducers = combineReducers({
-  question: question,
-	user: user
+var combined = combineReducers({
+  question: questionReducer,
+	user: userReducer
 });
 
-exports.reducers = reducers;
+export default combined;
