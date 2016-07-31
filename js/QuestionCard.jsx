@@ -59,8 +59,9 @@ handleRequestClose() {
     setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 250);
   }
   componentWillMount() {
-    this.props.dispatch(userActions.fetchUser());
-    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 500)
+    console.log(getQueryVariable('accessToken'));
+    this.props.dispatch(userActions.fetchUser(getQueryVariable('accessToken')));
+    setTimeout(() => {this.props.dispatch(questionActions.getQuestion(this.props.state.user.id))}, 1000)
   }
   getInput(e) {
     // console.log(e.target.value);
