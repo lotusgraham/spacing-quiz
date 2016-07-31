@@ -1,1 +1,1 @@
-web: node server.js
+web: npm run seedDB && node server.js
