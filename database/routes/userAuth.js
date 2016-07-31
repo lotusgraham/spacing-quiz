@@ -5,6 +5,15 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     path = require('path'),
     BearerStrategy = require('passport-http-bearer');
 
+var callbackURL;
+
+if (process.env.NODE_ENV !== 'production') {
+  callbackURL = 'http://localhost:3000/login/return'
+}
+else {
+  callbackURL = 'https://spacing-quiz.herokuapp.com/login/return'
+}
+
 module.exports = (app, passport) => {
   // Received a serialize error....solution found on stack overflow. Honestly, can't say i understand it...but it works.
   passport.serializeUser(function(user, done) {
@@ -35,7 +44,7 @@ module.exports = (app, passport) => {
   passport.use(new GoogleStrategy({
         clientID: "1451419795-k48hiumgo5m8vjedi2ftb6u13hvb635f.apps.googleusercontent.com",
         clientSecret: "Cp8k8nleYTsSeHx0J-hoIn_6",
-        callbackURL: 'http://localhost:3000/login/return'
+        callbackURL: callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOneAndUpdate({ // If user doesn't exist, then create. Otherwise, do nothing.
