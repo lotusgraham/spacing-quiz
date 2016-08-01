@@ -3,7 +3,8 @@ var createStore = redux.createStore;
 var applyMiddleware = redux.applyMiddleware;
 var thunk = require('redux-thunk').default;
 
-var reducers = require('./reducers');
+import combined from './reducers/combined';
 
-var store = createStore(reducers.questionsReducer, applyMiddleware(thunk));
+var store = createStore(combined, applyMiddleware(thunk));
+
 module.exports = store;

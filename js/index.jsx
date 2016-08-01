@@ -2,33 +2,27 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import QuestionCard from './Popover'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Login from './login';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import SinglePage from './SinglePage'
 
 
-const App = () => (
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <QuestionCard />
-  </MuiThemeProvider>
-);
+
+const routes = (
+  <Provider store={store}>
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <Router history={browserHistory}>
+        <Route path="/" component={Login}/>
+        <Route path="/quizstart" component={SinglePage}/>
+      </Router>
+    </MuiThemeProvider>
+  </Provider>
+)
 
 ReactDOM.render(
-  <App />,
+  routes,
   document.getElementById('app')
 );
-
-// console.log('test');
-//
-// var Person = function() {
-//     var name = 'Hello Earth';
-//     return (
-//         <div className="person">
-//             {name}
-//             <CardExampleWithAvatar />
-//         </div>
-//     );
-// };
-//
-// document.addEventListener('DOMContentLoaded', function() {
-//     ReactDOM.render(<Person />, document.getElementById('app'));
-// });
