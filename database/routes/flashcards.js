@@ -6,7 +6,7 @@ module.exports = (app) => {
     // if match
     Progress.find({'user': req.params.id}).populate('scores.question').exec((err, q) => {
       // console.log(q[0]);
-      q = q[0].scores.sort((a, b) => {
+      qr = q[0].scores.sort((a, b) => {
         if (a.mem_score > b.mem_score) {
           return 1;
         }
@@ -16,9 +16,9 @@ module.exports = (app) => {
         return 0
       });
       res.json({
-        english: q[0].question.english,
-        definition: q[0].question.definition,
-        image: q[0].question.image
+        english: qr[0].question.english,
+        definition: qr[0].question.definition,
+        image: qr[0].question.image
       });
     });
   });
